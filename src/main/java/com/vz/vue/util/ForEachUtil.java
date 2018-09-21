@@ -7,12 +7,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * @author wangxh
- * @company vanke.com
- * @date 2018/9/20 11:48
+ * 循环标记处理工具（${for_begin} ... ${for_end}）
+ * @auhtor visy.wang
  */
 public class ForEachUtil {
 
+    //处理器
+    //返回处理后的文本
     public static String process(String text, List<Column> columns){
         Pattern pattern = Pattern.compile(CONST.FOR_BEGIN_REGX+"(.|\\n)*?"+CONST.FOR_END_REGX);
         Pattern forBeginRegx = Pattern.compile(CONST.FOR_BEGIN_REGX);
@@ -31,7 +32,7 @@ public class ForEachUtil {
                 forBegin = beginMatcher.group(0);
             }
             //提取for的type
-            String type = "";
+            String type = "default";
             Matcher typeMatcher = typeRegx.matcher(forBegin);
             if(typeMatcher.find()){
                 type = typeMatcher.group(0).replace(CONST.FOR_TYPE_PREFIX,"");

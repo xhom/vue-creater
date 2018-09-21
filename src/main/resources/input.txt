@@ -20,6 +20,7 @@
     </el-form>
 
     <el-row>
+        <!-- 默认使用type=rows -->
         ${for_begin}
         <el-col :span="6"><span>${FIELD_DESC}: {{fullInfoDetail.${FIELD_NAME}}}</span></el-col>
         ${for_end}

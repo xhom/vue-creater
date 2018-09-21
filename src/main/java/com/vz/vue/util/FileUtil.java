@@ -3,6 +3,10 @@ package com.vz.vue.util;
 import com.vz.vue.common.CONST;
 import java.io.*;
 
+/**
+ * 文件工具类
+ * @auhtor visy.wang
+ */
 public class FileUtil {
 
     //文件读取

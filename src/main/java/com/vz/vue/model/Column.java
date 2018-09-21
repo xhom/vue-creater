@@ -1,7 +1,9 @@
 package com.vz.vue.model;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
+/**
+ * 字段实体
+ * @auhtor visy.wang
+ */
 public class Column {
     private String name; //字段名
     /**

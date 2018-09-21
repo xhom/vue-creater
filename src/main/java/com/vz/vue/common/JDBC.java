@@ -1,5 +1,9 @@
 package com.vz.vue.common;
 
+/**
+ * JDBC连接管理类
+ * @author visy.wang
+ */
 public enum JDBC {
     MYSQL(0,
         "MySQL",

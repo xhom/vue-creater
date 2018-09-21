@@ -3,6 +3,9 @@ package com.vz.vue.util;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * 变量名转换器
+ */
 public class NameConvert {
     private static Pattern linePattern = Pattern.compile("_(\\w)");
     /**下划线转驼峰*/

@@ -13,11 +13,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 生成器
+ * @auhtor wangxh
+ */
 public class Creater {
 
-    public static String inputPath = CONST.TEMP_PATH;
+    public static String inputPath = null; //CONST.TEMP_PATH;
 
-    //一键创建指定数据库下所有表对应的vue
+    //一键创建指定数据库下所有表对应的页面
     public static Result createAll(String dbName, JDBC jdbc){
         DBConnection.init(jdbc);
 

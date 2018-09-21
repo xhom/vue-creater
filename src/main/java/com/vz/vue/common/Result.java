@@ -1,9 +1,8 @@
 package com.vz.vue.common;
 
 /**
- * @author wangxh
- * @company vanke.com
- * @date 2018/9/17 13:15
+ * 返回处理结果
+ * @author visy.wang
  */
 public class Result {
     private boolean success = true;

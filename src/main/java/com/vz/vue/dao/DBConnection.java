@@ -10,6 +10,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 数据库连接及查询
+ * @auhtor visy.wang
+ */
 public class DBConnection {
     private static Connection conn = null;
     private static Statement stmt = null;

@@ -19,6 +19,10 @@ import java.awt.event.ItemListener;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * 界面
+ * @auhtor visy.wang
+ */
 public class UI extends JFrame {
     JLabel jlDBType = new JLabel("类型：",JLabel.LEFT);
     JLabel jlIp = new JLabel("IP：");
@@ -118,7 +122,7 @@ public class UI extends JFrame {
 
         //底部
         JPanel bottomPanel = new JPanel();
-        bottomPanel.add(jbtHelp);
+        //bottomPanel.add(jbtHelp);
         bottomPanel.add(jbtChooseFile);
         bottomPanel.add(jbtCreateSingle);
         this.add(bottomPanel, BorderLayout.SOUTH);

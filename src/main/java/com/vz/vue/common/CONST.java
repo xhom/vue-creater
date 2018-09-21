@@ -2,7 +2,7 @@ package com.vz.vue.common;
 
 /**
  * 常量管理类
- * @author wangxh
+ * @author visy.wang
  */
 public class CONST {
     //模板中可用的标记（全局标记）

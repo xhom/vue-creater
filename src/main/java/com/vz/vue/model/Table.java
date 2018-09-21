@@ -1,10 +1,12 @@
 package com.vz.vue.model;
 
-import javafx.scene.control.Tab;
-
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 表信息
+ * @auhtor visy.wang
+ */
 public class Table {
     private String dbName; //所属数据库名称
     private String tableName; //表名称
