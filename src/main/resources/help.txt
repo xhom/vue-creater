@@ -1,0 +1,52 @@
+#帮助信息#
+
+1.本生成器通过识别模板中的标记生成vue文件
+
+2.标记格式统一为 ${xxx},目前可用的标记如下：
+
+#全局标记
+
+${ENTITY_NAME}  实体名
+${ID_NAME}  主键名称
+${LIST_API}  分页查询接口名
+${ADD_API}  新增记录接口名
+${UPDATE_API}  修改记录接口名
+${DELETE_API} //删除记录接口名
+${FORM_NAME} //实体对应表单名
+${FORM_NAME_PLUS} //实体对应表单名（首字母大写）
+
+#特殊标记
+
+//循环标记（成对使用）
+//可以指定type可选值有 fields,rules,conds,formitems（注意：其他值会导致整个for标记不被识别）
+//type 不指定时默认fields
+//type使用示例： ${for_begin type=rules} 注意：type=rules,等号两端不能有空格
+//type值解释：
+//fields 提交需要的基础字段（默认：除了主键以外的所有字段）
+//rules 提交需校验字段（默认：除了主键和数据库可为空以外的所有字段）
+//conds 出现在查询条件中的字段（默认：除了主键以外的所有字段）
+//以上三种类型的字段已支持手动配置
+//formitems 表格需要展示的所有字段（默认：除了主键以外的所有字段）
+${for_begin}
+${for_end}
+
+#内部标记
+
+//在循环标记中可以使用的内部标记，后续可能会扩展
+${FIELD_DESC} //字段描述
+${FIELD_NAME} //字段名（变量名）
+${FIELD_LENGTH} //字段最大长度
+
+例子：
+<el-form ref="${FORM_NAME}" :model="${FORM_NAME}.data" :rules="${FORM_NAME}.rules">
+    ${for_begin type=fields}
+    <el-form-item label="${FIELD_DESC}" class="flex-20" prop="${FIELD_NAME}">
+        <el-input class="cms-width" v-model="${FORM_NAME}.data.${FIELD_NAME}" maxLength="${FIELD_LENGTH}"></el-input>
+    </el-form-item>
+    ${for_end}
+</el-form>
+
+3.自定义模板
+点击底部的“自定义模板”选择文件即可，使用你自己模板
+
+4.目前仅支持MySQL,其他数据库暂不支持

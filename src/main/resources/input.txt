@@ -1,0 +1,163 @@
+<template>
+    <p>欢迎体验Vue文件生成器！</p>
+    <el-form ref="${FORM_NAME}" :model="${FORM_NAME}.data" :rules="${FORM_NAME}.rules">
+        ${for_begin}
+        <el-form-item label="${FIELD_DESC}" class="flex-20"  prop="${FIELD_NAME}">
+            <el-input class="cms-width" v-model="${FORM_NAME}.data.${FIELD_NAME}" maxLength="${FIELD_LENGTH}"> </el-input>
+        </el-form-item>
+        ${for_end}
+    </el-form>
+    <el-row>
+        ${for_begin}
+        <el-col :span="6"><span>${FIELD_DESC}: {{fullInfoDetail.${FIELD_NAME}}}</span></el-col>
+        ${for_end}
+    </el-row>
+</template>
+
+<script>
+
+import { ${LIST_API}, ${ADD_API}, ${UPDATE_API}, ${DELETE_API} } from '@/api/${ENTITY_NAME}'
+
+export default {
+  name: '${ENTITY_NAME}',
+  created(){
+
+  },
+  mounted(){
+    this.pagedQuery();
+  },
+  data(){
+    return {
+      pagination:{
+        pageNo: 1,
+        pageSize: 10,
+        total: 0,
+        loading: false,
+        list: [],
+        condition: {
+          ${for_begin}
+          ${FIELD_NAME}: null,
+          ${for_end}
+        }
+      },
+      ${FORM_NAME}:{
+        title: '新增',
+        visible: false,
+        type: 'ADD',
+        typeMap:{
+          add: 'ADD',
+          update: 'UPDATE'
+        },
+        titleMap: {
+          add: '新增',
+          update: '修改'
+        },
+        data: {
+          ${for_begin}
+          ${FIELD_NAME}: null,
+          ${for_end}
+        },
+        rules:{
+          ${for_begin type=rules}
+          ${FIELD_NAME}: [{required: true, message: '${FIELD_DESC}不能为空', trigger: 'blur'}],
+          ${for_end}
+        }
+      }
+    };
+  },
+  methods: {
+    //分页查询
+    pagedQuery(){
+      const params = {
+        pageNo: this.pagination.pageNo,
+        pageSize: this.pagination.pageSize,
+        condition: this.pagination.condition
+      };
+      this.pagination.loading = true;
+      ${LIST_API}(params).then(resp => {
+        this.pagination.loading = false;
+        const {result, msg, data} = resp;
+        if(result){
+          this.pagination.total = data.count;
+          this.pagination.list = data.list;
+        }else{
+          this.$message.error(msg);
+        }
+      }).catch(err => {});
+    },
+    //新增or修改
+    saveData(){
+      if (this.${FORM_NAME}.type === this.${FORM_NAME}.typeMap.add) { //新增
+        ${ADD_API}(this.${FORM_NAME}.data).then(resp => {
+          this.saveDataFinished(resp);
+        }).catch(err => {});
+      }else{ //修改
+        ${UPDATE_API}(this.${FORM_NAME}.data).then(resp => {
+          this.saveDataFinished(resp);
+        }).catch(err => {});
+      }
+    },
+    //保存结束处理
+    saveDataFinished(resp){
+      const {result, msg, data} = resp;
+      if(result){
+        this.$message.success(msg);
+        this.${FORM_NAME}.visible = false; //关闭弹窗
+        this.refreshTable(); //刷新表格数据
+      }else{
+        this.$message.error(msg);
+      }
+    },
+    //删除单条数据
+    deleteSingle(row){
+      this.$confirm('确定要删除选择数据？','提示',{type: 'warning'}).then(() => {
+        ${DELETE_API}({${ID_NAME}: row.${ID_NAME}}).then(resp =>{
+          const {result, msg} = resp;
+          if(result){
+            this.$message.success(msg);
+          }else{
+            this.$message.error(msg);
+          }
+        }).catch(err => {});
+      }).catch(() => {});
+    },
+    //刷新表格
+    refreshTable(){
+      this.pagination.pageNo = 1;
+      //清空查询条件
+      for(let name in this.pagination.condition){
+        this.pagination.condition[name] = null;
+      }
+      this.pagedQuery();
+    },
+    //关闭弹窗后触发，注册到@close
+    close${FORM_NAME_PLUS}(){
+      //重置数据
+      for(let name in this.${FORM_NAME}.data){
+        this.${FORM_NAME}.data[name] = null;
+      }
+      //清除校验效果,form的ref="${FORM_NAME}"
+      this.$refs['${FORM_NAME}'].resetFields();
+    },
+    //展示${FORM_NAME}
+    //type: 请指定为${FORM_NAME}.typeMap中的选项
+    //row: 修改时必填
+    show${FORM_NAME_PLUS}(type, row){
+      if(type === this.${FORM_NAME}.typeMap.add){ //添加
+        this.${FORM_NAME}.type = this.${FORM_NAME}.typeMap.add;
+        this.${FORM_NAME}.title = this.${FORM_NAME}.titleMap.add;
+        this.${FORM_NAME}.visible = true;
+      }else{ //修改
+        //注意这里不能浅拷贝
+        for(let name in this.${FORM_NAME}.data){
+          this.${FORM_NAME}.data[name] = row[name];
+        }
+        this.${FORM_NAME}.type = this.${FORM_NAME}.typeMap.update;
+        this.${FORM_NAME}.title = this.${FORM_NAME}.titleMap.update;
+        this.${FORM_NAME}.visible = true;
+      }
+    }
+  }
+}
+
+</script>
