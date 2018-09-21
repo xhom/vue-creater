@@ -9,8 +9,6 @@ public class FileUtil {
     public static String readFile(String path){
         StringBuilder content = new StringBuilder();
         try{
-            path = FileUtil.class.getClassLoader().getResource(path).getFile();
-            System.out.println(path);
             File file = new File(path);
             FileInputStream fis = new FileInputStream(file);
             InputStreamReader reader = new InputStreamReader(fis,"UTF-8");

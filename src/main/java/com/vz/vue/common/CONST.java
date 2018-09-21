@@ -28,7 +28,7 @@ public class CONST {
     public static final String FOR_END_REGX = "\\$\\{for_end\\}";
 
     //文件路径
-    public static final String TEMP_PATH ="input.txt";
+    public static final String TEMP_PATH ="src\\main\\resources\\input.txt";
     public static final String OUTPUT_PATH = "D:\\vueCreater\\output\\";
     public static final String FILE_TYPE = ".vue";
 

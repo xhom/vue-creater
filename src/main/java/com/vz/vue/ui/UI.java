@@ -253,7 +253,7 @@ public class UI extends JFrame {
                     column.setIsRule((Boolean)jtable.getValueAt(i,4));
                 }
 
-                Creater.createSingle(currTable);
+                Creater.createSingle(currTable,null);
 
                 showMsg(currTable.getTableName() + CONST.FILE_TYPE + " 创建完成！文件路径为："+CONST.OUTPUT_PATH);
             }

@@ -1,6 +1,3 @@
-package com.vz.vue.ui;
-
-
 import com.vz.vue.common.CONST;
 import com.vz.vue.common.JDBC;
 import com.vz.vue.model.Table;

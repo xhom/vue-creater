@@ -14,36 +14,25 @@ import java.util.Map;
 
 public class Creater {
 
-    public static String inputPath = null;
+    public static String inputPath = CONST.TEMP_PATH;
 
     //一键创建指定数据库下所有表对应的vue
     public static void createAll(String dbName,JDBC jdbc){
-        String baseTemplate = FileUtil.readFile(inputPath); //读取模版文件
-
         DBConnection.init(jdbc);
+
+        String baseTemplate = FileUtil.readFile(inputPath); //读取模版文件
 
         for(Table t : DBConnection.findTable(dbName)){
             t = DBConnection.getTable(t); //获取表的字段信息
-
-            Map<String,String> $map = get$map(t); //获取模版需替换标记的映射关系
-
-            String template = new String(baseTemplate); //复制模板
-
-            template = ForEachUtil.process(template,t.getColumns());//解释for标记
-
-            for(Map.Entry<String,String> entry : $map.entrySet()){ //解释全局标记
-                template = template.replace(entry.getKey(),entry.getValue());
-            }
-
-            FileUtil.writeFile(CONST.OUTPUT_PATH + t.getTableName() + CONST.FILE_TYPE,template); //输出文件
-
-            System.out.println(t.getTableName() + CONST.FILE_TYPE+" 创建完成");
+            createSingle(t,new String(baseTemplate));
         }
     }
 
     //根据配置创建一个单页面
-    public static void createSingle(Table t){
-        String template = FileUtil.readFile(inputPath); //读取模版文件
+    public static void createSingle(Table t,String template){
+        if(template == null){
+            template = FileUtil.readFile(inputPath); //读取模版文件
+        }
 
         Map<String,String> $map = get$map(t); //获取模版需替换标记的映射关系
 
