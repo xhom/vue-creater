@@ -1,12 +1,14 @@
 package com.vz.vue.service;
 
 import com.vz.vue.common.CONST;
+import com.vz.vue.common.Result;
 import com.vz.vue.util.FileUtil;
 import com.vz.vue.common.JDBC;
 import com.vz.vue.dao.DBConnection;
 import com.vz.vue.model.Column;
 import com.vz.vue.model.Table;
 import com.vz.vue.util.ForEachUtil;
+import javafx.scene.control.Tab;
 
 import java.util.HashMap;
 import java.util.List;
@@ -17,15 +19,23 @@ public class Creater {
     public static String inputPath = CONST.TEMP_PATH;
 
     //一键创建指定数据库下所有表对应的vue
-    public static void createAll(String dbName,JDBC jdbc){
+    public static Result createAll(String dbName, JDBC jdbc){
         DBConnection.init(jdbc);
 
         String baseTemplate = FileUtil.readFile(inputPath); //读取模版文件
+
+        List<Table> tables = DBConnection.findTable(dbName);
+
+        if(tables==null || tables.isEmpty()){
+            return new Result(false,"数据库["+dbName+"]不存在");
+        }
 
         for(Table t : DBConnection.findTable(dbName)){
             t = DBConnection.getTable(t); //获取表的字段信息
             createSingle(t,new String(baseTemplate));
         }
+
+        return new Result();
     }
 
     //根据配置创建一个单页面

@@ -2,8 +2,6 @@ package com.vz.vue.util;
 
 import com.vz.vue.common.CONST;
 import com.vz.vue.model.Column;
-
-import javax.swing.text.MutableAttributeSet;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -50,15 +48,15 @@ public class ForEachUtil {
 
                 boolean isReplace = false;
 
-                if("fields".equals(type) ){
-                    isReplace = column.getIsField();
+                if("rows".equals(type)){
+                    isReplace = column.getIsRow();
                 }else if("conds".equals(type)){
                     isReplace = column.getIsCond();
-                }else if("rules".equals(type) && column.getIsCond()){
+                }else if("fields".equals(type) ){
+                    isReplace = column.getIsField();
+                }else if("rules".equals(type)){
                     isReplace = column.getIsRule();
-                }else if("formitems".equals(type) && column.getIsField()){
-                    isReplace = column.getIsField();//TODO
-                }else{//默认fields
+                }else{//默认rows
                     isReplace = column.getIsField();
                 }
 

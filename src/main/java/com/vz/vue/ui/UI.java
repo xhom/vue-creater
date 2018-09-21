@@ -2,6 +2,7 @@ package com.vz.vue.ui;
 
 import com.vz.vue.common.CONST;
 import com.vz.vue.common.JDBC;
+import com.vz.vue.common.Result;
 import com.vz.vue.model.Column;
 import com.vz.vue.model.MyTableModel;
 import com.vz.vue.model.Table;
@@ -111,7 +112,7 @@ public class UI extends JFrame {
         //中间表格部分
         jtable.setModel(new MyTableModel());
         JScrollPane jsp = new JScrollPane(jtable, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        Border centerTitle = BorderFactory.createTitledBorder("字段配置");
+        final Border centerTitle = BorderFactory.createTitledBorder("字段配置");
         jsp.setBorder(centerTitle);
         this.add(jsp, BorderLayout.CENTER);
 
@@ -196,9 +197,10 @@ public class UI extends JFrame {
                     Column column = columns.get(i);
                     tableData[i][0] = column.getComment();
                     tableData[i][1] = column.getName();
-                    tableData[i][2] = column.getIsField();
+                    tableData[i][2] = column.getIsRow();
                     tableData[i][3] = column.getIsCond();
-                    tableData[i][4] = column.getIsRule();
+                    tableData[i][4] = column.getIsField();
+                    tableData[i][5] = column.getIsRule();
                 }
 
                 TableModel tableModel = new MyTableModel(tableData);
@@ -206,6 +208,7 @@ public class UI extends JFrame {
                 jtable.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(new JCheckBox()));
                 jtable.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(new JCheckBox()));
                 jtable.getColumnModel().getColumn(4).setCellEditor(new DefaultCellEditor(new JCheckBox()));
+                jtable.getColumnModel().getColumn(5).setCellEditor(new DefaultCellEditor(new JCheckBox()));
 
                 jbtCreateSingle.setEnabled(true);
             }
@@ -227,9 +230,13 @@ public class UI extends JFrame {
                     return;
                 }
 
-                Creater.createAll(dbName,jdbc);
+                Result result = Creater.createAll(dbName,jdbc);
+                if(!result.getSuccess()){
+                    showMsg(result.getMsg());
+                }else{
+                    showMsg("所有页面已创建完成！文件路径为："+CONST.OUTPUT_PATH);
+                }
 
-                showMsg("所有页面已创建完成！文件路径为："+CONST.OUTPUT_PATH);
             }
         });
 
@@ -248,9 +255,10 @@ public class UI extends JFrame {
                 java.util.List<Column> columns = currTable.getColumns();
                 for(int i=0; i<columns.size(); i++){
                     Column column = columns.get(i);
-                    column.setIsField((Boolean)jtable.getValueAt(i,2));
+                    column.setIsRow((Boolean)jtable.getValueAt(i,2));
                     column.setIsCond((Boolean)jtable.getValueAt(i,3));
-                    column.setIsRule((Boolean)jtable.getValueAt(i,4));
+                    column.setIsField((Boolean)jtable.getValueAt(i,4));
+                    column.setIsRule((Boolean)jtable.getValueAt(i,5));
                 }
 
                 Creater.createSingle(currTable,null);

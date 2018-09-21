@@ -4,9 +4,9 @@ import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 
 public class MyTableModel extends AbstractTableModel {
-    String[] head = {"描述","字段名","基础字段","可查询","可校验"};
+    String[] head = {"描述","字段名","基础字段(rows)","可查询(conds)","可编辑(fields)","可校验(rules)"};
     Object[][] data = {};
-    Class[] typeArray = { Object.class, Object.class, Boolean.class,Boolean.class, Boolean.class };
+    Class[] typeArray = { Object.class, Object.class, Boolean.class,Boolean.class, Boolean.class,Boolean.class };
 
     public MyTableModel(){}
 

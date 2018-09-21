@@ -88,8 +88,9 @@ public class DBConnection {
                 column.setIsPriKey("PRI".equalsIgnoreCase(rs.getString("COLUMN_KEY")));
                 column.setType(rs.getString("COLUMN_TYPE"));
 
-                column.setIsField(!column.getIsPriKey());
+                column.setIsRow(!column.getIsPriKey());
                 column.setIsCond(!column.getIsPriKey());
+                column.setIsField(!column.getIsPriKey());
                 column.setIsRule(!column.getIsPriKey() && !column.getIsNull());
 
                 table.appendToColumns(column);

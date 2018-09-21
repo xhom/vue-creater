@@ -1,5 +1,7 @@
 package com.vz.vue.model;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 public class Column {
     private String name; //字段名
     /**
@@ -19,8 +21,9 @@ public class Column {
     private Boolean isPriKey; //是否主键
     private String type; //列类型
 
-    private Boolean isField = true; //是否基础字段
+    private Boolean isRow = true; //基础字段
     private Boolean isCond = true; //是否条件字段
+    private Boolean isField = true; //是否编辑字段
     private Boolean isRule = true; //是否校验字段
 
     public String getName() {
@@ -101,5 +104,13 @@ public class Column {
 
     public void setIsRule(Boolean rule) {
         isRule = rule;
+    }
+
+    public Boolean getIsRow() {
+        return isRow;
+    }
+
+    public void setIsRow(Boolean row) {
+        isRow = row;
     }
 }

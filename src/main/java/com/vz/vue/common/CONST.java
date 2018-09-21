@@ -11,7 +11,7 @@ public class CONST {
     public static final String FORM_NAME = "${FORM_NAME}"; //实体对应表单名
     public static final String FORM_NAME_PLUS = "${FORM_NAME_PLUS}"; //实体对应表单名（首字母大写）
 
-    //循环标记（成对使用）可以指定type,可选值有（fields,rules,conds,formitems，默认fields，注意：其他值会导致整个for标记不被翻译）
+    //循环标记（成对使用）可以指定type,可选值有（fields,rules,conds,rows，默认fields，注意：其他值会导致整个for标记不被翻译）
     //type使用示例： ${for_begin type=rules} 注意：type=rules,等号两端不能有空格
     public static final String FOR_BEGIN = "${for_begin}";
     public static final String FOR_END = "${for_end}";
@@ -22,7 +22,7 @@ public class CONST {
 
 
     //正则
-    public static final String FOR_BEGIN_REGX = "\\$\\{for_begin(\\s+type=(rules|fields|conds|formitems))?\\s*\\}";
+    public static final String FOR_BEGIN_REGX = "\\$\\{for_begin(\\s+type=(rules|fields|conds|rows))?\\s*\\}";
     public static final String FOR_TYPE_REGX = "type=\\w+";
     public static final String FOR_TYPE_PREFIX = "type=";
     public static final String FOR_END_REGX = "\\$\\{for_end\\}";
