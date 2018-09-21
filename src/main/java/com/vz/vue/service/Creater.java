@@ -8,7 +8,6 @@ import com.vz.vue.dao.DBConnection;
 import com.vz.vue.model.Column;
 import com.vz.vue.model.Table;
 import com.vz.vue.util.ForEachUtil;
-import javafx.scene.control.Tab;
 
 import java.util.HashMap;
 import java.util.List;

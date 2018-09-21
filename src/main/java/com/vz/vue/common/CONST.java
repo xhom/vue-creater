@@ -1,5 +1,9 @@
 package com.vz.vue.common;
 
+/**
+ * 常量管理类
+ * @author wangxh
+ */
 public class CONST {
     //模板中可用的标记（全局标记）
     public static final String ENTITY_NAME = "${ENTITY_NAME}"; //实体名
@@ -31,5 +35,34 @@ public class CONST {
     public static final String TEMP_PATH ="src\\main\\resources\\input.txt";
     public static final String OUTPUT_PATH = "D:\\vueCreater\\output\\";
     public static final String FILE_TYPE = ".vue";
+
+
+    //控件类型配置
+    //对应 字段注释的{"input"："input"} //默认input
+    public static class INPUT_TYPE {
+        public static final String INPUT = "input";
+        public static final String SELECT = "select";
+        public static final String SWITCH = "switch";
+        public static final String DATA_TIME = "datetime";
+        public static final String DATE = "date";
+        public static final String TIME = "time";
+    }
+
+    //校验类型配置
+    //对应 字段注释的{"type"："required"} //默认 required
+    public static class VALIDATE_TYPE {
+        public static final String REQUIRED = "required";
+        public static final String EMAIL = "email";
+        public static final String POST_CODE = "postcode";
+        public static final String PHONE = "phone";
+        public static final String MOBILE = "mobile";
+        public static final String FAX = "fax";
+        public static final String NUMBER = "number";
+        public static final String INT = "int"; //正整数(含0)
+        public static final String INT_PLUS = "intplus";//正整数
+        public static final String FLOAT = "float";//浮点数
+        public static final String FLOAT2 = "float2";//最多两位小数
+        public static final String FLOAT3 = "float3";//最对三位小数
+    }
 
 }

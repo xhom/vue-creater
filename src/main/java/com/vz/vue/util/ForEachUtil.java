@@ -57,7 +57,7 @@ public class ForEachUtil {
                 }else if("rules".equals(type)){
                     isReplace = column.getIsRule();
                 }else{//默认rows
-                    isReplace = column.getIsField();
+                    isReplace = column.getIsRow();
                 }
 
                 if(isReplace){

@@ -1,17 +1,30 @@
 <template>
     <p>欢迎体验Vue文件生成器！</p>
+
+    <el-table :data="pagination.list" style="width: 100%">
+        ${for_begin type=rows}
+        <el-table-column label="${FIELD_DESC}" width="180">
+          <template slot-scope="scope">
+            <span style="margin-left: 10px">{{ scope.row.${FIELD_NAME} }}</span>
+          </template>
+        </el-table-column>
+        ${for_end}
+    </el-table>
+
     <el-form ref="${FORM_NAME}" :model="${FORM_NAME}.data" :rules="${FORM_NAME}.rules">
-        ${for_begin}
+        ${for_begin type=fields}
         <el-form-item label="${FIELD_DESC}" class="flex-20"  prop="${FIELD_NAME}">
             <el-input class="cms-width" v-model="${FORM_NAME}.data.${FIELD_NAME}" maxLength="${FIELD_LENGTH}"> </el-input>
         </el-form-item>
         ${for_end}
     </el-form>
+
     <el-row>
         ${for_begin}
         <el-col :span="6"><span>${FIELD_DESC}: {{fullInfoDetail.${FIELD_NAME}}}</span></el-col>
         ${for_end}
     </el-row>
+
 </template>
 
 <script>
@@ -35,7 +48,7 @@ export default {
         loading: false,
         list: [],
         condition: {
-          ${for_begin}
+          ${for_begin type=conds}
           ${FIELD_NAME}: null,
           ${for_end}
         }
@@ -53,7 +66,7 @@ export default {
           update: '修改'
         },
         data: {
-          ${for_begin}
+          ${for_begin type=fields}
           ${FIELD_NAME}: null,
           ${for_end}
         },

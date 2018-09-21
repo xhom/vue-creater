@@ -19,7 +19,7 @@ ${FORM_NAME_PLUS} //实体对应表单名（首字母大写）
 
 //循环标记（成对使用）
 //可以指定type可选值有 rows,conds,fields,rules（注意：其他值会导致整个for标记不被识别）
-//type 不指定时默认fields
+//type 不指定时默认rows
 //type使用示例： ${for_begin type=rules} 注意：type=rules,等号两端不能有空格
 //type值解释：
 //rows 表格要展示的所有字段（默认：除了主键以外的所有字段）

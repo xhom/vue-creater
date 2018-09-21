@@ -32,7 +32,17 @@ public enum JDBC {
     private String dbName;
     private String baseDb;
 
-    JDBC(Integer type, String desc, String driverName, String urlTemp,String ip,String port,String user,String password,String dbName,String baseDb){
+    JDBC(Integer type,
+         String desc,
+         String driverName,
+         String urlTemp,
+         String ip,
+         String port,
+         String user,
+         String password,
+         String dbName,
+         String baseDb){
+
         this.type = type;
         this.desc = desc;
         this.driverName = driverName;
